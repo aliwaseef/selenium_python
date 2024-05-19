@@ -46,7 +46,9 @@ WebDriverWait(driver, 10).until(
 )
 
 # Filter the search result by 'On Sale'
-
+on_sale_checkbox = driver.find_element('') # add the element mapping
+driver.execute_script("argument[0].scrollIntoView();", on_sale_checkbox)
+on_sale_checkbox.click()
 
 # Gather all elements that represent individual TV listings on the search results page.
 tvs = driver.find_elements(By.CSS_SELECTOR, ".sku-item")
