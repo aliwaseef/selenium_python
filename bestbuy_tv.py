@@ -17,7 +17,7 @@ service = Service(executable_path='C:/path/to/chromedriver.exe')
 driver = webdriver.Chrome(service=service)
 
 # Directs the browser to open the URL for Best Buy's homepage.
-driver.get("https://www.bestbuy.com")
+driver.get("https://www.bestbuy.ca")
 
 # Maximizes the browser window to ensure visibility of all web elements.
 driver.maximize_window()
@@ -45,9 +45,14 @@ WebDriverWait(driver, 10).until(
     EC.visibility_of_element_located((By.CSS_SELECTOR, ".sku-header"))
 )
 
+# Filter the search result by 'On Sale'
+
+
 # Gather all elements that represent individual TV listings on the search results page.
 tvs = driver.find_elements(By.CSS_SELECTOR, ".sku-item")
 for tv in tvs:
+    # Click and open each listing
+    
     # Extract and print the TV title from each listing.
     title = tv.find_element(By.CSS_SELECTOR, ".sku-header a").text
     try:
@@ -66,6 +71,8 @@ for tv in tvs:
     except:
         sales_end_date = "No sales information"
 
+    # Return to previous page
+    
     # Output the information for each TV to the console.
     print(f"TV: {title}, Price: {price}, Sales End Date: {sales_end_date}")
 
