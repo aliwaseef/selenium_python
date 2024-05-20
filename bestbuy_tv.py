@@ -42,6 +42,11 @@ WebDriverWait(driver, 10).until(
     EC.visibility_of_element_located((By.CSS_SELECTOR, ".sku-header"))
 )
 
+# Filter the search result by 'On Sale'
+on_sale_checkbox = driver.find_element('') # add the element mapping
+driver.execute_script("argument[0].scrollIntoView();", on_sale_checkbox)
+on_sale_checkbox.click()
+
 # Gather all elements that represent individual TV listings on the search results page.
 tvs = driver.find_elements(By.CSS_SELECTOR, ".sku-item")
 
@@ -50,6 +55,8 @@ for tv in tvs:
     try:
         # Extract and print the TV title from each listing.
         title = tv.find_element(By.CSS_SELECTOR, ".sku-header a").text
+
+        # Click and open each listing
 
         # Extract the size from the title and continue only if it is 75 inches or larger.
         if '75"' in title or '76"' in title or '77"' in title or '78"' in title or '79"' in title or '80"' in title or '81"' in title or '82"' in title or '83"' in title or '84"' in title or '85"' in title:
